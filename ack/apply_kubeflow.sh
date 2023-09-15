@@ -65,11 +65,11 @@ function wait_pods_ready() {
     while true
     do
         notrunningpods=$(kubectl get pod -A |grep -E 'kubeflow|kubeflow-user-example-com|knative-serving|istio-system|auth|cert-manager' |grep -v 'Running')
-        if [ -z $notrunningpods ]; then
+        if [ -z "$notrunningpods" ]; then
             break
         fi
         echo "======== waiting pod ready ========"
-        echo $notrunningpods
+        kubectl get pod -A |grep -E 'kubeflow|kubeflow-user-example-com|knative-serving|istio-system|auth|cert-manager' |grep -v 'Running'
         sleep 2
     done
 }
